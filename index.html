@@ -3,618 +3,1494 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌸 个人主页 🌸</title>
+    <title>美食大转盘 - 点餐助手</title>
     <style>
+        /* 
+        ============================================
+        样式表说明 - 素雅版
+        ============================================
+        设计理念:
+        - 简约、清晰、易用
+        - 柔和的色彩搭配
+        - 减少不必要的动画和装饰
+        - 保持功能完整性
+        ============================================
+        */
+         
+        :root {
+            --primary-color: #4a90e2;
+            --primary-light: #6aa8f7;
+            --secondary-color: #50c878;
+            --accent-color: #ff8c42;
+            --danger-color: #ff6b6b;
+            --warning-color: #ffa726;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-overlay: rgba(255, 255, 255, 0.95);
+            --border-color: #e0e0e0;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+        }
+         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+   
         body {
-            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
-            background: linear-gradient(135deg, rgba(255, 154, 158, 0.08) 0%, rgba(254, 207, 239, 0.08) 50%, rgba(254, 207, 239, 0.08) 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1rem;
+            color: var(--text-primary);
+            line-height: 1.6;
         }
-
-        /* 二次元动漫背景 */
-        .anime-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('./hatsune_miku_vocaloid_wallpaper.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            z-index: -3;
-            filter: blur(0px);
-        }
-
-        /* 动漫背景装饰 */
-        .anime-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(255, 192, 203, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 105, 180, 0.01) 0%, transparent 30%);
-            z-index: -2;
-        }
-
-        /* 樱花飘落动画 */
-        .sakura {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, rgba(255, 183, 197, 0.25), rgba(255, 145, 164, 0.25));
-            border-radius: 50% 0 50% 0;
-            animation: fall linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* 主容器 */
+   
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
         }
-
-        /* 头部区域 */
+   
         .header {
             text-align: center;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 192, 203, 0.1));
-            backdrop-filter: blur(45px);
-            border-radius: 25px;
-            padding: 40px 20px;
-            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, rgba(255, 154, 158, 0.1), rgba(250, 208, 196, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.05);
-            position: relative;
-            overflow: hidden;
-            border: 3px solid rgba(255, 255, 255, 0.12);
+   
+        .header h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0.5rem 0;
+            letter-spacing: -0.5px;
         }
-
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
+   
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .avatar::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        @keyframes shine {
-            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .name {
-            font-size: 2.5em;
-            color: #d63384;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .qq-info {
-            font-size: 1em;
-            color: #8e44ad;
-            margin-bottom: 10px;
-            opacity: 1;
-            font-weight: 500;
-        }
-
-        .description {
-            font-size: 1.2em;
-            color: #8e44ad;
-            margin-bottom: 20px;
-        }
-
-        /* 导航菜单 */
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .nav-item {
-            background: linear-gradient(135deg, rgba(255, 154, 158, 0.12), rgba(254, 207, 239, 0.12));
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(35px);
-        }
-
-        .nav-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.08);
-            background: linear-gradient(135deg, rgba(254, 207, 239, 0.2), rgba(255, 154, 158, 0.2));
-        }
-
-        /* 内容区域 */
-        .content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 240, 245, 0.12));
-            backdrop-filter: blur(45px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.06);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 240, 245, 0.18));
-        }
-
-        .card-title {
-            font-size: 1.5em;
-            color: #d63384;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-content {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* 云服务器广告特殊样式 */
-        .ad-card {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(238, 90, 36, 0.2), rgba(255, 159, 243, 0.2));
-            color: white;
-            border: 3px solid rgba(255, 255, 255, 0.12);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(40px);
-        }
-
-        .ad-card::before {
-            content: "🔥 热门推荐";
-            position: absolute;
-            top: -5px;
-            right: -30px;
-            background: rgba(255, 56, 56, 0.25);
-            color: white;
-            padding: 5px 40px;
-            transform: rotate(45deg);
-            font-size: 12px;
-            font-weight: bold;
-            backdrop-filter: blur(10px);
-        }
-
-        .ad-card .card-title {
-            color: white;
-            font-size: 1.8em;
-        }
-
-        .ad-card .card-content {
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .ad-button {
+         
+        .shortcut-hint {
             display: inline-block;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(248, 249, 250, 0.3));
-            color: #ff6b6b;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
-            backdrop-filter: blur(35px);
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(74, 144, 226, 0.2);
         }
-
-        .ad-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(248, 249, 250, 0.5));
+   
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            align-items: start;
         }
-
-        /* 社交链接 */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .social-link {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 154, 158, 0.12), rgba(254, 207, 239, 0.12));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.03);
-            backdrop-filter: blur(35px);
-            border: 2px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.08);
-            background: linear-gradient(135deg, rgba(255, 154, 158, 0.2), rgba(254, 207, 239, 0.2));
-        }
-
-        /* 页脚 */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 192, 203, 0.1));
-            backdrop-filter: blur(45px);
-            border-radius: 20px;
-            color: #8e44ad;
-            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.06);
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .content {
+  
+        @media (max-width: 900px) {
+            .main-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .nav-menu {
+            .list-panel { order: 2; }
+            .wheel-panel { order: 1; }
+        }
+   
+        .panel {
+            background: var(--bg-overlay);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-light);
+            transition: box-shadow 0.2s ease;
+        }
+         
+        .panel:hover {
+            box-shadow: 0 6px 16px var(--shadow-medium);
+        }
+   
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+   
+        .panel-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+         
+        .count-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+            background: var(--primary-color);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+        }
+   
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+   
+        .input-label {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+   
+        .input-row {
+            display: flex;
+            gap: 0.75rem;
+        }
+   
+        input, textarea {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: all 0.2s;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+         
+        input::placeholder, textarea::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+   
+        input:focus, textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+        }
+   
+        .input-row input {
+            flex: 1;
+        }
+   
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            user-select: none;
+            white-space: nowrap;
+            font-size: 0.95rem;
+            position: relative;
+        }
+         
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+         
+        .btn.highlight::after {
+            opacity: 1;
+        }
+   
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+   
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+   
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-light);
+        }
+   
+        .btn-success {
+            background: var(--secondary-color);
+            color: white;
+        }
+  
+        .btn-success:hover:not(:disabled) {
+            background: #40b368;
+        }
+         
+        .btn-secondary {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+   
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--bg-secondary);
+        }
+         
+        .btn-danger {
+            background: var(--danger-color);
+            color: white;
+        }
+         
+        .btn-danger:hover:not(:disabled) {
+            background: #ff5252;
+        }
+         
+        .btn-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+         
+        .btn-warning:hover:not(:disabled) {
+            background: #ff9800;
+        }
+   
+        .punishment-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
+          
+        .punishment-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .punishment-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        .punishment-list::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+   
+        .punishment-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+   
+        .punishment-item:hover {
+            background: #f9f9f9;
+            transform: translateX(4px);
+        }
+   
+        .punishment-item.active {
+            background: rgba(74, 144, 226, 0.05);
+            border-color: var(--primary-color);
+            font-weight: 500;
+        }
+         
+        .punishment-item .food-icon {
+            margin-right: 0.75rem;
+        }
+   
+        .punishment-item .remove-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+   
+        .punishment-item .remove-btn:hover {
+            background: var(--danger-color);
+            border-color: var(--danger-color);
+            color: white;
+        }
+   
+        .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+   
+        .wheel-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+        }
+   
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px var(--shadow-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+         
+        .wheel-pointer::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--accent-color);
+        }
+   
+        .wheel-svg {
+            width: 100%;
+            height: 100%;
+            transition-property: transform;
+            transition-timing-function: cubic-bezier(0.15, 0, 0.20, 1);
+        }
+   
+        .control-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+   
+        .result-display {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--text-primary);
+            padding: 1.5rem 2.5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 12px var(--shadow-light);
+            min-width: 280px;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+  
+        .result-display.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+   
+        .result-display h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+          
+        .result-display .punishment-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            word-break: break-word;
+            line-height: 1.4;
+            color: var(--primary-color);
+        }
+   
+        .celebration-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+   
+        .celebration-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 32rem;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+        }
+   
+        .celebration-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.2s;
+            font-weight: 300;
+        }
+   
+        .celebration-close:hover {
+            background: #e9ecef;
+        }
+   
+        .celebration-inner {
+            position: relative;
+        }
+   
+        .celebration-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+   
+        .celebration-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+   
+        .celebration-result-box {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+   
+        .celebration-result-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+  
+        .celebration-result-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+   
+        .celebration-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+   
+        .celebration-btn:hover {
+            background: var(--primary-light);
+        }
+   
+        .empty-state {
+            padding: 2rem;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            color: var(--text-light);
+            text-align: center;
+            border: 1px dashed var(--border-color);
+            font-size: 1rem;
+        }
+         
+        .file-import-note {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+         
+        .clear-all-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+         
+        .confirm-clear-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+         
+        .confirm-clear-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 28rem;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+        }
+         
+        .confirm-clear-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--warning-color);
+        }
+         
+        .confirm-clear-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+         
+        .confirm-clear-message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+         
+        .confirm-clear-count {
+            font-weight: 700;
+            color: var(--danger-color);
+            font-size: 1.2rem;
+        }
+         
+        .confirm-clear-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+         
+        .confirm-clear-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 120px;
+        }
+         
+        .confirm-clear-btn.confirm {
+            background: var(--secondary-color);
+            color: white;
+        }
+         
+        .confirm-clear-btn.confirm:hover {
+            background: #40b368;
+        }
+         
+        .confirm-clear-btn.cancel {
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+         
+        .confirm-clear-btn.cancel:hover {
+            background: var(--bg-secondary);
+        }
+   
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+            40%, 43% { transform: translateY(-10px); }
+            70% { transform: translateY(-5px); }
+            90% { transform: translateY(-2px); }
+        }
+  
+        @keyframes modalPop {
+            0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+         
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+   
+        .hidden {
+            display: none;
+        }
+  
+        .modal-enter {
+            animation: modalPop 0.3s ease forwards;
+        }
+         
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+         
+        @media (max-width: 768px) {
+            .panel {
+                padding: 1.25rem;
+            }
+             
+            .header h1 {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+            }
+             
+            .header p {
+                font-size: 1rem;
+            }
+             
+            .control-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .name {
-                font-size: 2em;
+             
+            .btn {
+                width: 100%;
+                max-width: 300px;
             }
-        }
-
-        /* 浮动心形装饰 */
-        .heart {
-            position: fixed;
-            color: #ff69b4;
-            font-size: 20px;
-            animation: float 6s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            75% { transform: translateY(-10px) rotate(-5deg); }
-        }
-
-        /* 加载动画 */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 105, 180, 0.3);
-            border-radius: 50%;
-            border-top-color: #ff69b4;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+             
+            .celebration-content {
+                padding: 2rem;
+            }
+             
+            .celebration-title {
+                font-size: 1.5rem;
+            }
+             
+            .celebration-result-text {
+                font-size: 1.5rem;
+            }
+             
+            .confirm-clear-content {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 二次元动漫背景 -->
-    <div class="anime-background"></div>
-    
-    <!-- 动漫背景装饰 -->
-    <div class="anime-bg"></div>
-    
-    <!-- 主容器 -->
     <div class="container">
-        <!-- 头部区域 -->
-        <header class="header">
-            <div class="avatar" id="avatar">
-                <div class="loading"></div>
-            </div>
-            <h1 class="name" id="nickname">JnylBl</h1>
-            <p class="qq-info" id="qq-info">QQ: <span id="qq-number">1000001</span></p>
-            <p class="description">✨ 欢迎来到我的二次元粉色世界 ✨</p>
-            
-            <nav class="nav-menu">
-                <a href="#about" class="nav-item">🎀 关于我</a>
-                <a href="#portfolio" class="nav-item">🎨 作品集</a>
-                <a href="#contact" class="nav-item">💌 联系我</a>
-            </nav>
-        </header>
-
-        <!-- 内容区域 -->
-        <main class="content">
-            <!-- 关于我 -->
-            <section id="about" class="card">
-                <h2 class="card-title">🎀 关于我</h2>
-                <div class="card-content">
-                    <p>大家好！我是一个热爱二次元文化的小萌新~ 喜欢粉色、动漫、游戏和一切可爱的东西！</p>
-                    <br>
-                    <p>🌟 兴趣爱好：看番、画画、编程、游戏</p>
-                    <p>💖 最爱颜色：粉色系</p>
-                    <p>🎵 喜欢音乐：ACG音乐、J-POP</p>
-                    <p>🎮 常玩游戏：原神、明日方舟、碧蓝档案</p>
-                </div>
-            </section>
-
-            <!-- 我的技能 -->
-            <section class="card">
-                <h2 class="card-title">✨ 我的技能</h2>
-                <div class="card-content">
-                    <p>🎨 <strong>设计技能：</strong> Photoshop, Illustrator, Figma</p>
-                    <br>
-                    <p>💻 <strong>编程语言：</strong> HTML, CSS, JavaScript, Python</p>
-                    <br>
-                    <p>🎮 <strong>游戏技能：</strong> 原神、明日方舟、碧蓝档案</p>
-                    <br>
-                    <p>🌸 <strong>其他特长：</strong> 二次元文化、动漫推荐、萌化一切</p>
-                </div>
-            </section>
-
-            <!-- 最近动态 -->
-            <section class="card">
-                <h2 class="card-title">📝 最近动态</h2>
-                <div class="card-content">
-                    <p>🎉 <strong>2024.01.15</strong> - 完成了新的个人主页设计！</p>
-                    <br>
-                    <p>🎨 <strong>2024.01.10</strong> - 学会了CSS动画制作</p>
-                    <br>
-                    <p>🎮 <strong>2024.01.05</strong> - 原神抽到了心海！好开心~</p>
-                    <br>
-                    <p>📚 <strong>2024.01.01</strong> - 新年快乐！今年要更加努力学习!</p>
-                </div>
-            </section>
-
-            <!-- 联系方式 -->
-            <section id="contact" class="card">
-                <h2 class="card-title">💌 联系我</h2>
-                <div class="card-content">
-                    <p>想要和我交流二次元话题或者技术问题吗？欢迎通过以下方式联系我：</p>
-                    <br>
-                    <p>📧 邮箱：example@email.com</p>
-                    <p>💬 QQ：<span id="contact-qq"2374443495</span></p>
-                    <p>🐦 微博：@1111</p>
-                    <p>📱 微信：加好友请备注来源哦~</p>
-                </div>
-            </section>
-
-            <!-- 推荐番剧 -->
-            <section class="card">
-                <h2 class="card-title">🎬 推荐番剧</h2>
-                <div class="card-content">
-                    <p>🌸 <strong>春季必看：</strong>《樱花庄的宠物女孩》</p>
-                    <br>
-                    <p>💖 <strong>治愈系：</strong>《K-ON!》轻音部</p>
-                    <br>
-                    <p>⚔️ <strong>战斗番：</strong>《鬼灭之刃》</p>
-                    <br>
-                    <p>🎭 <strong>日常番：</strong>《小林家的龙女仆》</p>
-                </div>
-            </section>
-        </main>
-
-        <!-- 社交链接 -->
-       <div class="social-links">
-            <a href="https://baidu.com/" target="_blank" class="social-link" title="百度">🔎</a>
+        <!-- 头部标题 -->
+        <div class="header">
+            <h1>美食大转盘</h1>
+            <p>还在为"吃什么"发愁吗？让转盘帮你决定今天的美食！</p>
+            <div class="shortcut-hint">💡 提示：按空格键可以快速开始点餐</div>
         </div>
-
-        <!-- 页脚 -->
-        <footer class="footer">
-            <p>💖 Made with Love by <span id="footer-nickname">二次元小萌新</span> 💖</p>
-            <p>🌸 感谢您的访问，祝您每天都充满粉色的美好心情！🌸</p>
-            <br>
-            <p><small>Powered by Jnylbl </small></p>
-        </footer>
+   
+        <div class="main-grid">
+            <!-- 菜品管理面板 -->
+            <div class="panel list-panel">
+                <div class="panel-header">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <h2>我的美食菜单</h2>
+                        <div class="count-badge" id="punishmentCount">0项</div>
+                    </div>
+                    <button class="btn btn-danger" id="clearAllPunishmentsBtn">
+                        一键清空
+                    </button>
+                </div>
+                   
+                <div class="input-group">
+                    <label class="input-label">添加新菜品：</label>
+                    <div class="input-row">
+                        <input type="text" id="punishmentInput" placeholder="例如：麻辣香锅、披萨、寿司..." autocomplete="off">
+                        <button class="btn btn-primary" id="addPunishmentBtn">
+                            添加
+                        </button>
+                    </div>
+                </div>
+                 
+                <!-- 文件导入功能 -->
+                <div class="input-group">
+                    <label class="input-label">导入菜品列表（TXT文件）：</label>
+                    <div class="input-row">
+                        <input type="file" id="importFile" accept=".txt" style="flex: 1; padding: 0.5rem;">
+                        <button class="btn btn-secondary" id="importBtn">
+                            导入
+                        </button>
+                    </div>
+                    <div class="file-import-note">
+                        每行一个菜品，支持批量导入
+                    </div>
+                </div>
+   
+                <div class="punishment-list" id="punishmentList">
+                    <!-- 菜品项目动态加载 -->
+                </div>
+                 
+                <div class="clear-all-section">
+                    <button class="btn btn-warning" id="resetToDefaultBtn">
+                        恢复默认菜单
+                    </button>
+                </div>
+            </div>
+   
+            <!-- 转盘控制面板 -->
+            <div class="panel wheel-panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div class="wheel-container">
+                    <div class="wheel-wrapper">
+                        <!-- 转盘指针 -->
+                        <div class="wheel-pointer"></div>
+                        <!-- SVG转盘 -->
+                        <svg id="wheelSvg" class="wheel-svg" viewBox="-250 -250 500 500">
+                            <defs>
+                                <radialGradient id="centerGradient">
+                                    <stop offset="0%" stop-color="#e0e0e0" />
+                                    <stop offset="100%" stop-color="#c0c0c0" />
+                                </radialGradient>
+                                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(0,0,0,0.1)"/>
+                                </filter>
+                            </defs>
+                            <!-- 转盘扇形区域（动态生成） -->
+                            <g id="wheelSections"></g>
+                            <!-- 转盘中心装饰 -->
+                            <circle cx="0" cy="0" r="50" fill="url(#centerGradient)" stroke="#fff" stroke-width="4" filter="url(#shadow)"/>
+                            <circle cx="0" cy="0" r="35" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/>
+                            <text x="0" y="5" fill="#666" font-size="16" font-weight="bold" text-anchor="middle" dominant-baseline="middle">点餐</text>
+                        </svg>
+                    </div>
+   
+                    <!-- 控制按钮区域 -->
+                    <div class="control-buttons">
+                        <button class="btn btn-primary" id="startBtn" style="min-width: 160px; padding: 1rem;">
+                            <span id="startBtnText">开始点餐</span>
+                        </button>
+                        <button class="btn btn-secondary" id="resetBtn" style="padding: 1rem;">
+                            重置转盘
+                        </button>
+                    </div>
+   
+                    <!-- 结果展示区域 -->
+                    <div id="resultDisplay" class="result-display">
+                        <h3>今日推荐</h3>
+                        <div class="punishment-text" id="winnerPunishment">等待选择...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+  
+    <!-- 庆祝弹窗 -->
+    <div id="celebrationModal" class="celebration-modal hidden">
+        <div class="celebration-content">
+            <button class="celebration-close" id="closeCelebrationBtn">×</button>
+            <div class="celebration-inner">
+                <span class="celebration-emoji">🍽️</span>
+                <h2 class="celebration-title">今日美食已选定!</h2>
+                   
+                <div class="celebration-result-box">
+                    <div class="celebration-result-label">转盘推荐：</div>
+                    <div class="celebration-result-text" id="celebrationPunishment"></div>
+                </div>
+   
+                <button class="celebration-btn" id="confirmCelebrationBtn">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+     
+    <!-- 一键清空确认弹窗 -->
+    <div id="confirmClearModal" class="confirm-clear-modal hidden">
+        <div class="confirm-clear-content modal-enter">
+            <span class="confirm-clear-icon">⚠️</span>
+            <h2 class="confirm-clear-title">确认清空菜单</h2>
+            <div class="confirm-clear-message">
+                您确定要清空所有 <span class="confirm-clear-count" id="clearCount">0</span> 个菜品吗？<br>
+                此操作无法撤销，所有自定义和导入的菜品将被永久删除。
+            </div>
+            <div class="confirm-clear-buttons">
+                <button class="confirm-clear-btn cancel" id="cancelClearBtn">
+                    取消
+                </button>
+                <button class="confirm-clear-btn confirm" id="confirmClearBtn">
+                    确定清空
+                </button>
+            </div>
+        </div>
+    </div>
+   
     <script>
-        // QQ号码配置
-        const QQ_NUMBER = '2374443495';
-        const FIXED_NICKNAME = "Jnylbl";
-        
-        // 更新页面中的QQ号码
-        function updateQQNumber() {
-            document.getElementById('qq-number').textContent = QQ_NUMBER;
-            document.getElementById('contact-qq').textContent = QQ_NUMBER;
+        // ========== 全局变量声明 ==========
+         
+        // 默认菜品列表
+        const defaultPunishments = [
+            '披萨', 
+            '汉堡', 
+            '拉面', 
+            '寿司', 
+            '麻辣香锅', 
+            '火锅', 
+            '沙拉', 
+            '咖喱饭',
+            '便当',
+            '三明治',
+            '意大利面',
+            '墨西哥卷饼',
+            '饺子',
+            '炸虾',
+            '冰淇淋'
+        ];
+         
+        // 从LocalStorage加载数据
+        let punishments = JSON.parse(localStorage.getItem('wheelPunishments')) || [...defaultPunishments];
+          
+        // 转盘状态控制变量
+        let isSpinning = false;
+        let currentRotation = 0;
+        let currentPunishment = '';
+         
+        // 键盘快捷键状态
+        let isSpacebarPressed = false;
+        let spacebarCooldown = false;
+ 
+        // 转盘扇形颜色列表 - 素雅色调
+        const colors = [
+            '#4a90e2', '#50c878', '#ff8c42', '#9c5bdf', '#ff6b6b',
+            '#20b2aa', '#ffa726', '#7e8c8d', '#e91e63', '#009688',
+            '#673ab7', '#ff5722', '#795548', '#607d8b', '#3f51b5'
+        ];
+         
+        // ========== 工具函数 ==========
+         
+        /**
+         * 更新菜品项目计数显示
+         */
+        function updatePunishmentCount() {
+            const countElement = document.getElementById('punishmentCount');
+            const count = punishments.length;
+            countElement.textContent = `${count}项`;
         }
-
-        // 直接设置用户信息，不使用接口
-        function loadUserInfo() {
-            // 设置固定昵称
-            document.getElementById('nickname').textContent = FIXED_NICKNAME;
-            document.getElementById('footer-nickname').textContent = FIXED_NICKNAME;
-            
-            // 加载高清头像
-            const avatarImg = document.createElement('img');
-            // 使用更高清的头像参数
-            avatarImg.src = `https://q1.qlogo.cn/g?b=qq&nk=${QQ_NUMBER}&s=640&t=${Date.now()}`;
-            avatarImg.alt = 'QQ头像';
-            
-            // 设置图片质量优化
-            avatarImg.style.imageRendering = 'crisp-edges';
-            avatarImg.style.imageRendering = '-webkit-optimize-contrast';
-            
-            avatarImg.onload = function() {
-                document.getElementById('avatar').innerHTML = '';
-                document.getElementById('avatar').appendChild(avatarImg);
-                console.log('头像加载成功');
-            };
-            
-            avatarImg.onerror = function() {
-                // 尝试其他高清头像源
-                this.src = `https://q2.qlogo.cn/headimg_dl?dst_uin=${QQ_NUMBER}&spec=640`;
-                this.onerror = function() {
-                    // 最终备用方案
-                    this.src = `https://thirdqq.qlogo.cn/g?b=qq&nk=${QQ_NUMBER}&s=640`;
-                    this.onerror = function() {
-                        document.getElementById('avatar').innerHTML = '🌸';
-                    };
-                };
-            };
+         
+        /**
+         * 保存菜品列表到LocalStorage
+         */
+        function savePunishments() {
+            localStorage.setItem('wheelPunishments', JSON.stringify(punishments));
         }
-
-        // 创建樱花飘落效果
-        function createSakura() {
-            for (let i = 0; i < 15; i++) {
-                const sakura = document.createElement('div');
-                sakura.className = 'sakura';
-                sakura.style.left = Math.random() * 100 + 'vw';
-                sakura.style.animationDuration = Math.random() * 3 + 2 + 's';
-                sakura.style.animationDelay = Math.random() * 2 + 's';
-                document.body.appendChild(sakura);
-                
-                // 5秒后移除元素
-                setTimeout(() => {
-                    if (sakura.parentNode) {
-                        sakura.parentNode.removeChild(sakura);
+         
+        /**
+         * 显示一键清空确认弹窗
+         */
+        function showClearConfirmation() {
+            if (isSpinning) {
+                alert('转盘旋转时不能清空菜品！');
+                return;
+            }
+             
+            if (punishments.length === 0) {
+                alert('当前没有菜品可清空！');
+                return;
+            }
+             
+            // 更新清空数量显示
+            document.getElementById('clearCount').textContent = punishments.length;
+             
+            // 显示确认弹窗
+            const modal = document.getElementById('confirmClearModal');
+            modal.classList.remove('hidden');
+        }
+         
+        /**
+         * 隐藏一键清空确认弹窗
+         */
+        function hideClearConfirmation() {
+            document.getElementById('confirmClearModal').classList.add('hidden');
+        }
+         
+        /**
+         * 执行一键清空操作
+         */
+        function clearAllPunishments() {
+            if (isSpinning) {
+                alert('转盘旋转时不能清空菜品！');
+                return;
+            }
+             
+            // 记录清空前的数量
+            const previousCount = punishments.length;
+             
+            // 清空菜品列表
+            punishments = [];
+             
+            // 更新UI
+            updatePunishmentList();
+            updatePunishmentCount();
+            updateWheel();
+             
+            // 保存到LocalStorage
+            savePunishments();
+             
+            // 重置转盘状态
+            currentRotation = 0;
+            currentPunishment = '';
+            const wheelSvg = document.getElementById('wheelSvg');
+            wheelSvg.style.transitionDuration = '0ms';
+            wheelSvg.style.transform = 'rotate(0deg)';
+             
+            // 隐藏结果
+            const resultDisplay = document.getElementById('resultDisplay');
+            resultDisplay.classList.remove('show');
+             
+            // 隐藏庆祝弹窗
+            closeCelebration();
+             
+            // 显示操作反馈
+            alert(`已清空 ${previousCount} 个菜品！`);
+             
+            // 隐藏确认弹窗
+            hideClearConfirmation();
+        }
+         
+        /**
+         * 恢复默认菜单
+         */
+        function resetToDefaultMenu() {
+            if (isSpinning) {
+                alert('转盘旋转时不能恢复默认菜单！');
+                return;
+            }
+             
+            if (!confirm('确定要恢复默认菜单吗？当前所有菜品将被替换为默认菜品。')) {
+                return;
+            }
+             
+            // 恢复默认菜品列表
+            punishments = [...defaultPunishments];
+             
+            // 更新UI
+            updatePunishmentList();
+            updatePunishmentCount();
+            updateWheel();
+             
+            // 保存到LocalStorage
+            savePunishments();
+             
+            alert('已恢复默认菜单！');
+        }
+         
+        /**
+         * 导入TXT文件并解析菜品列表
+         */
+        function importPunishmentsFromTxt(file) {
+            const reader = new FileReader();
+             
+            reader.onload = function(e) {
+                try {
+                    const content = e.target.result;
+                    // 按换行符分割，过滤空行和首尾空格
+                    const newPunishments = content.split(/\r?\n/)
+                        .map(item => item.trim())
+                        .filter(item => item.length > 0);
+                     
+                    if (newPunishments.length === 0) {
+                        alert('文件为空或格式不正确！');
+                        return;
                     }
-                }, 5000);
-            }
+                     
+                    // 合并并去重
+                    const uniqueNewPunishments = newPunishments.filter(
+                        item => !punishments.includes(item)
+                    );
+                     
+                    if (uniqueNewPunishments.length === 0) {
+                        alert('所有菜品已存在！');
+                        return;
+                    }
+                     
+                    // 添加到现有列表
+                    punishments.push(...uniqueNewPunishments);
+                     
+                    // 更新UI并保存
+                    updatePunishmentList();
+                    updatePunishmentCount();
+                    updateWheel();
+                    savePunishments();
+                     
+                    alert(`成功导入 ${uniqueNewPunishments.length} 个新菜品！${newPunishments.length - uniqueNewPunishments.length > 0 ? `有 ${newPunishments.length - uniqueNewPunishments.length} 个重复菜品已跳过。` : ''}`);
+                     
+                } catch (error) {
+                    console.error('导入文件时出错:', error);
+                    alert('文件解析失败，请检查文件格式！');
+                }
+            };
+             
+            reader.onerror = function() {
+                alert('读取文件失败！');
+            };
+             
+            reader.readAsText(file);
         }
-
-        // 创建浮动心形
-        function createHearts() {
-            const hearts = ['💖', '💕', '💗', '💓', '💝', '🌸', '🎀', '✨'];
-            for (let i = 0; i < 6; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.animationDelay = Math.random() * 6 + 's';
-                document.body.appendChild(heart);
-            }
+         
+        /**
+         * 高亮开始按钮（快捷键提示）
+         */
+        function highlightStartButton() {
+            const startBtn = document.getElementById('startBtn');
+            startBtn.classList.add('highlight', 'pulse');
+             
+            setTimeout(() => {
+                startBtn.classList.remove('pulse');
+            }, 500);
+             
+            setTimeout(() => {
+                startBtn.classList.remove('highlight');
+            }, 1000);
         }
-
-        // 页面加载完成后执行
-        window.addEventListener('load', function() {
-            updateQQNumber();
-            loadUserInfo();
-            createSakura();
-            createHearts();
-            
-            // 每隔3秒创建新的樱花
-            setInterval(createSakura, 3000);
-        });
-
-        // 平滑滚动到锚点
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+ 
+        // ========== DOM加载完成事件 ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化UI
+            updatePunishmentList();
+            updatePunishmentCount();
+            updateWheel();
+               
+            // 输入框回车事件
+            const input = document.getElementById('punishmentInput');
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addPunishment();
+                }
+            });
+             
+            // 绑定按钮事件
+            document.getElementById('addPunishmentBtn').addEventListener('click', addPunishment);
+            document.getElementById('importBtn').addEventListener('click', function() {
+                const fileInput = document.getElementById('importFile');
+                if (fileInput.files.length > 0) {
+                    importPunishmentsFromTxt(fileInput.files[0]);
+                    fileInput.value = ''; // 清空文件选择
+                } else {
+                    alert('请先选择文件！');
+                }
+            });
+             
+            document.getElementById('startBtn').addEventListener('click', startGame);
+            document.getElementById('resetBtn').addEventListener('click', resetWheel);
+            document.getElementById('resetToDefaultBtn').addEventListener('click', resetToDefaultMenu);
+            document.getElementById('closeCelebrationBtn').addEventListener('click', closeCelebration);
+            document.getElementById('confirmCelebrationBtn').addEventListener('click', closeCelebration);
+             
+            // 一键清空相关事件
+            document.getElementById('clearAllPunishmentsBtn').addEventListener('click', showClearConfirmation);
+            document.getElementById('cancelClearBtn').addEventListener('click', hideClearConfirmation);
+            document.getElementById('confirmClearBtn').addEventListener('click', clearAllPunishments);
+             
+            // 点击确认弹窗外部关闭弹窗
+            document.getElementById('confirmClearModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideClearConfirmation();
+                }
+            });
+             
+            // 使用事件委托处理动态生成的删除按钮
+            document.getElementById('punishmentList').addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-btn')) {
+                    const item = e.target.closest('.punishment-item');
+                    const index = Array.from(this.children).indexOf(item);
+                    if (index !== -1) {
+                        removePunishment(index);
+                    }
+                }
+            });
+             
+            // 键盘事件监听 - 空格键开始点餐
+            document.addEventListener('keydown', function(e) {
+                // 检查是否按下了空格键
+                if (e.code === 'Space' || e.key === ' ') {
+                    e.preventDefault(); // 防止页面滚动
+                     
+                    // 检查是否在输入框中
+                    const activeElement = document.activeElement;
+                    const isInputFocused = activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA';
+                     
+                    // 检查是否有弹窗打开
+                    const isModalOpen = !document.getElementById('celebrationModal').classList.contains('hidden') || 
+                                       !document.getElementById('confirmClearModal').classList.contains('hidden');
+                     
+                    // 如果不在输入框中且没有弹窗打开，且转盘没有在旋转
+                    if (!isInputFocused && !isModalOpen && !isSpinning) {
+                        startGame();
+                        highlightStartButton();
+                    }
+                }
+            });
+             
+            // 添加空格键提示的视觉反馈
+            document.addEventListener('keyup', function(e) {
+                if (e.code === 'Space' || e.key === ' ') {
+                    isSpacebarPressed = false;
                 }
             });
         });
-
-        // 鼠标跟随效果
-        document.addEventListener('mousemove', function(e) {
-            if (Math.random() < 0.08) { // 8% 概率生成粒子
-                const particles = ['✨', '💖', '🌸', '💕'];
-                const particle = document.createElement('div');
-                particle.innerHTML = particles[Math.floor(Math.random() * particles.length)];
-                particle.style.position = 'fixed';
-                particle.style.left = e.clientX + 'px';
-                particle.style.top = e.clientY + 'px';
-                particle.style.fontSize = '12px';
-                particle.style.color = '#ff69b4';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '9999';
-                particle.style.animation = 'fadeOut 2s ease-out forwards';
-                document.body.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 2000);
+         
+        // ========== 核心功能函数 ==========
+         
+        /**
+         * 添加新菜品项目
+         */
+        function addPunishment() {
+            const input = document.getElementById('punishmentInput');
+            const name = input.value.trim();
+             
+            // 输入验证
+            if (!name) {
+                alert('请输入菜品名称！');
+                return;
             }
-        });
-
-        // 添加淡出动画
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeOut {
-                0% { opacity: 1; transform: scale(1) translateY(0); }
-                100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+             
+            if (name.length > 30) {
+                alert('菜品名称过长，请控制在30字以内！');
+                return;
             }
-        `;
-        document.head.appendChild(style);
+               
+            if (!punishments.includes(name)) {
+                punishments.push(name);
+                input.value = '';
+                input.focus();
+                updatePunishmentList();
+                updatePunishmentCount();
+                updateWheel();
+                savePunishments();
+            } else {
+                alert('该菜品已存在！');
+            }
+        }
+   
+        /**
+         * 删除菜品项目
+         */
+        function removePunishment(index) {
+            if (isSpinning) {
+                alert('转盘旋转时不能删除菜品！');
+                return;
+            }
+             
+            if (confirm('确定要删除这个菜品吗？')) {
+                punishments.splice(index, 1);
+                updatePunishmentList();
+                updatePunishmentCount();
+                updateWheel();
+                savePunishments();
+            }
+        }
+   
+        /**
+         * 更新菜品列表UI
+         */
+        function updatePunishmentList() {
+            const list = document.getElementById('punishmentList');
+               
+            // 处理空列表状态
+            if (punishments.length === 0) {
+                list.innerHTML = '<div class="empty-state">菜品菜单是空的，请先添加菜品！</div>';
+                return;
+            }
+               
+            // 生成列表HTML
+            list.innerHTML = punishments.map((punishment, index) => `
+                <div class="punishment-item ${currentPunishment === punishment ? 'active' : ''}">
+                    <span>${punishment}</span>
+                    <button class="remove-btn" title="删除此项">×</button>
+                </div>
+            `).join('');
+        }
+   
+        /**
+         * 更新转盘SVG图形
+         */
+        function updateWheel() {
+            const sectionsGroup = document.getElementById('wheelSections');
+            sectionsGroup.innerHTML = '';
+               
+            // 空转盘状态
+            if (punishments.length === 0) {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', 'M 0 0 L 240 0 A 240 240 0 1 1 -240 0 Z');
+                path.setAttribute('fill', '#f5f5f5');
+                path.setAttribute('stroke', '#e0e0e0');
+                path.setAttribute('stroke-width', '2');
+                   
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', '0');
+                text.setAttribute('y', '0');
+                text.setAttribute('fill', '#999');
+                text.setAttribute('font-size', '24');
+                text.setAttribute('font-weight', '500');
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dominant-baseline', 'middle');
+                text.textContent = '请添加菜品';
+                   
+                sectionsGroup.appendChild(path);
+                sectionsGroup.appendChild(text);
+                return;
+            }
+               
+            // 计算每个扇形的角度
+            const sectionAngle = 360 / punishments.length;
+            const radius = 240;
+   
+            // 生成每个扇形
+            punishments.forEach((punishment, index) => {
+                // 计算起始和结束角度（弧度制）
+                const startAngle = index * sectionAngle;
+                const endAngle = (index + 1) * sectionAngle;
+                   
+                const startAngleRad = (startAngle * Math.PI) / 180;
+                const endAngleRad = (endAngle * Math.PI) / 180;
+                   
+                // 判断是否为大圆弧
+                const largeArcFlag = sectionAngle > 180 ? 1 : 0;
+                   
+                // 计算弧线起点和终点坐标
+                const x1 = Math.cos(startAngleRad) * radius;
+                const y1 = Math.sin(startAngleRad) * radius;
+                const x2 = Math.cos(endAngleRad) * radius;
+                const y2 = Math.sin(endAngleRad) * radius;
+                   
+                // 构建扇形路径数据
+                const pathData = `M 0 0 L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
+                   
+                // 创建扇形路径元素
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', colors[index % colors.length]);
+                path.setAttribute('stroke', '#fff');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('filter', 'url(#shadow)');
+                   
+                // 计算文本位置
+                const midAngle = (startAngle + endAngle) / 2;
+                const textRadius = radius * 0.65;
+                const textX = Math.cos((midAngle * Math.PI) / 180) * textRadius;
+                const textY = Math.sin((midAngle * Math.PI) / 180) * textRadius;
+                   
+                // 根据项目数量调整字体大小
+                let fontSize = 20;
+                if (punishments.length > 15) fontSize = 14;
+                else if (punishments.length > 10) fontSize = 16;
+                else if (punishments.length > 8) fontSize = 18;
+                   
+                // 创建文本元素
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', textX);
+                text.setAttribute('y', textY);
+                text.setAttribute('fill', '#fff');
+                text.setAttribute('font-size', fontSize);
+                text.setAttribute('font-weight', '600');
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dominant-baseline', 'middle');
+                text.setAttribute('transform', `rotate(${midAngle}, ${textX}, ${textY})`);
+                 
+                // 文本截断处理
+                const maxChars = 6;
+                let displayText = punishment;
+                if (punishment.length > maxChars) {
+                    displayText = punishment.substring(0, maxChars) + '..';
+                }
+                text.textContent = displayText;
+                 
+                // 添加到SVG
+                sectionsGroup.appendChild(path);
+                sectionsGroup.appendChild(text);
+            });
+        }
+   
+        /**
+         * 开始转盘游戏
+         */
+        function startGame() {
+            // 前置检查
+            if (punishments.length === 0) {
+                alert('请先添加菜品！');
+                return;
+            }
+   
+            if (isSpinning) return;
+   
+            // 设置旋转状态
+            isSpinning = true;
+            currentPunishment = '';
+               
+            // 更新按钮状态
+            const startBtn = document.getElementById('startBtn');
+            const startBtnText = document.getElementById('startBtnText');
+            startBtn.disabled = true;
+            startBtnText.textContent = '点餐中...';
+               
+            // 隐藏上一个结果
+            const resultDisplay = document.getElementById('resultDisplay');
+            resultDisplay.classList.remove('show');
+             
+            // 生成随机动画参数
+            const randomDuration = 4000 + Math.random() * 4000;
+             
+            // 计算最终旋转角度
+            const randomDegreeOffset = Math.floor(Math.random() * 360);
+            const randomSpins = 5 + Math.floor(Math.random() * 5);
+            const finalRotation = currentRotation + (randomSpins * 360) + randomDegreeOffset;
+             
+            // 更新当前角度
+            currentRotation = finalRotation;
+             
+            // 应用旋转动画
+            const wheelSvg = document.getElementById('wheelSvg');
+            wheelSvg.style.transitionDuration = `${randomDuration}ms`;
+            wheelSvg.style.transform = `rotate(${currentRotation}deg)`;
+             
+            // 动画结束后计算结果
+            setTimeout(() => {
+                isSpinning = false;
+                 
+                // 转盘指针固定角度
+                const POINTER_ANGLE = 270;
+                 
+                // 计算实际旋转角度
+                const actualRotation = currentRotation % 360;
+                 
+                // 计算指针指向的角度
+                let winningAngle = (POINTER_ANGLE - actualRotation);
+                 
+                // 角度归一化处理
+                winningAngle = winningAngle % 360;
+                if (winningAngle < 0) {
+                    winningAngle += 360;
+                }
+                 
+                // 根据角度计算选中扇形的索引
+                const sectionAngle = 360 / punishments.length;
+                const winningIndex = Math.floor(winningAngle / sectionAngle);
+                 
+                // 获取选中的菜品
+                currentPunishment = punishments[winningIndex] || punishments[0];
+                 
+                // 恢复按钮状态
+                startBtn.disabled = false;
+                startBtnText.textContent = '再次点餐';
+                 
+                // 显示结果
+                document.getElementById('winnerPunishment').textContent = currentPunishment;
+                resultDisplay.classList.add('show');
+                 
+                // 更新列表高亮
+                updatePunishmentList();
+                 
+                // 显示庆祝弹窗
+                showCelebration();
+            }, randomDuration);
+        }
+   
+        /**
+         * 重置转盘
+         */
+        function resetWheel() {
+            if (isSpinning) {
+                alert('转盘旋转时不能重置！');
+                return;
+            }
+             
+            if (!confirm('确定要重置转盘吗？')) return;
+               
+            currentRotation = 0;
+            currentPunishment = '';
+               
+            // 立即重置转盘
+            const wheelSvg = document.getElementById('wheelSvg');
+            wheelSvg.style.transitionDuration = '0ms';
+            wheelSvg.style.transform = 'rotate(0deg)';
+               
+            // 隐藏结果
+            const resultDisplay = document.getElementById('resultDisplay');
+            resultDisplay.classList.remove('show');
+             
+            // 更新UI
+            updatePunishmentList();
+            closeCelebration();
+        }
+   
+        /**
+         * 显示庆祝弹窗
+         */
+        function showCelebration() {
+            const modal = document.getElementById('celebrationModal');
+            document.getElementById('celebrationPunishment').textContent = currentPunishment;
+             
+            // 显示并添加动画
+            modal.classList.remove('hidden');
+            const content = modal.querySelector('.celebration-content');
+            content.classList.remove('modal-enter');
+            void content.offsetWidth; // 触发重排
+            content.classList.add('modal-enter');
+        }
+   
+        /**
+         * 关闭庆祝弹窗
+         */
+        function closeCelebration() {
+            document.getElementById('celebrationModal').classList.add('hidden');
+        }
     </script>
 </body>
-</html> 
+</html>
