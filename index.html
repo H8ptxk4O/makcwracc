@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>个人主义 · 思想独白</title>
+    <!-- 使用极简但优雅的字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf9f8;   /* 柔和的米白底，像旧纸张 */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            color: #1e1b1b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* 极简容器，克制留白 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+        }
+
+        /* 头部区域 — 简洁有力 */
+        .hero {
+            margin-bottom: 4rem;
+            border-bottom: 1px solid #e6e2dc;
+            padding-bottom: 2.5rem;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            color: #0a0a0a;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 380;
+            color: #5f5b56;
+            border-left: 3px solid #d4cdc4;
+            padding-left: 1rem;
+            margin: 0.5rem 0 0.25rem;
+        }
+
+        /* 个人主义引言区 — 精神标记 */
+        .philosophy {
+            background: #ffffff;
+            padding: 2rem 2rem;
+            margin: 2.5rem 0;
+            border-radius: 28px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.03);
+            border: 1px solid #efebe7;
+        }
+
+        .quote {
+            font-size: 1.45rem;
+            font-weight: 400;
+            line-height: 1.45;
+            font-style: normal;
+            color: #211f1c;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #a39a91;
+            font-weight: 400;
+        }
+
+        /* 关于 / 个人简介 — 叙事感 */
+        .section {
+            margin: 3.5rem 0;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 550;
+            letter-spacing: -0.2px;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            border-bottom: 2px solid #ddd2c8;
+            padding-bottom: 4px;
+            color: #3e3a35;
+        }
+
+        .bio-text {
+            font-size: 1rem;
+            color: #2c2926;
+            margin-bottom: 1.2rem;
+            font-weight: 370;
+        }
+
+        .bio-text strong {
+            font-weight: 550;
+            color: #1f1c18;
+        }
+
+        /* 优雅列表 — 极简著作或想法 */
+        .essay-list {
+            list-style: none;
+            margin-top: 0.75rem;
+        }
+
+        .essay-list li {
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px dotted #e9e2db;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .essay-date {
+            font-size: 0.8rem;
+            color: #b1a79d;
+            min-width: 70px;
+            font-feature-settings: 'tnum';
+            font-weight: 400;
+        }
+
+        .essay-title {
+            font-weight: 480;
+            color: #2b2825;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .essay-title:hover {
+            color: #8a6e5b;
+            text-decoration: underline;
+        }
+
+        /* 社交与链接 — 干净线性 */
+        .links {
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ece5df;
+        }
+
+        .link-item {
+            text-decoration: none;
+            color: #4e4841;
+            font-weight: 450;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .link-item:hover {
+            color: #b87c5a;
+            border-bottom-color: #b87c5a;
+        }
+
+        /* 小脚注 — 呼吸感 */
+        .footer-note {
+            margin-top: 5rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #bcb2a8;
+            border-top: 1px solid #efe8e2;
+            padding-top: 2rem;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 560px) {
+            .container {
+                padding: 2rem 1.25rem;
+            }
+            .name {
+                font-size: 2.4rem;
+            }
+            .quote {
+                font-size: 1.2rem;
+            }
+            .philosophy {
+                padding: 1.5rem;
+            }
+            .essay-list li {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .essay-date {
+                min-width: auto;
+            }
+        }
+
+        /* 个性化点缀 —— 极简装饰 */
+        .dot-accent {
+            width: 4px;
+            height: 4px;
+            background: #cfc5bb;
+            display: inline-block;
+            border-radius: 50%;
+            margin: 0 8px 3px 4px;
+        }
+        .now-reading {
+            background: #fef9f2;
+            padding: 0.9rem 1.2rem;
+            border-radius: 18px;
+            margin: 2rem 0 1rem;
+            font-size: 0.9rem;
+            border: 1px solid #f1e7df;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部：以个人为主体，不依赖额外标签 -->
+    <div class="hero">
+        <div class="name">林怀宣<span style="font-weight:300; color:#b2aa9f;"> · 孤读者笔记</span></div>
+        <div class="tagline">写作者 · 独立思想散步者 / 偏爱清醒与疏离</div>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color:#8f867c;">
+            保持怀疑，诚实书写 <span class="dot-accent"></span> 个人主义是一种浪漫的抵抗
+        </div>
+    </div>
+
+    <!-- 哲学引言 — 个人主义精神内核 -->
+    <div class="philosophy">
+        <div class="quote">“一个人只有在独处的时候，才能完全成为自己。谁要是不热爱独处，谁就是不热爱自由。”</div>
+        <div class="quote-author">—— 叔本华</div>
+        <div style="margin-top: 1rem; font-size: 0.85rem; color:#8f7a6a; border-top: 1px solid #f0e9e2; padding-top: 1rem;">
+            个人主义并非孤绝，而是忠于内心的罗盘。不喧哗，自有声。
+        </div>
+    </div>
+
+    <!-- 关于我：简洁叙事 突出独立意志 -->
+    <div class="section">
+        <div class="section-title">/ 关于独白</div>
+        <div class="bio-text">
+            写代码也写诗，在<strong>理性与感性之间游荡</strong>。相信每个灵魂都是一座孤岛，
+            却也因此拥有完整边界。现居杭州，从事数字产品设计，业余写随笔与短篇。
+            这里不追逐流量，只存放值得被时间阅读的思考。
+        </div>
+        <div class="bio-text">
+            目前关注：存在主义心理学、极繁与极简设计、以及如何更从容地<strong>做少数派</strong>。
+            个人博客对我而言，是在嘈杂网络中划出一片自留地 —— 干净，朴素，忠于自己。
+        </div>
+    </div>
+
+    <!-- 最近书写 / 日志 — 模拟个人主义的创作痕迹 -->
+    <div class="section">
+        <div class="section-title">/ 私语手记</div>
+        <ul class="essay-list">
+            <li><span class="essay-date">2025.04.12</span><a href="#" class="essay-title">论孤独与技术之间的空隙</a></li>
+            <li><span class="essay-date">2025.03.28</span><a href="#" class="essay-title">极简界面与精神熵减</a></li>
+            <li><span class="essay-date">2025.03.10</span><a href="#" class="essay-title">个人独立博客的重访：重回手写 HTML 的快感</a></li>
+            <li><span class="essay-date">2025.02.21</span><a href="#" class="essay-title">阅读卡夫卡日记：个体的困境即真实</a></li>
+        </ul>
+        <div class="now-reading">
+            📖 此刻在读 · 《瓦尔登湖》梭罗 & 《倦怠社会》韩炳哲
+            <span style="display:block; font-size:0.75rem; margin-top:6px; color:#b0a395;">—— 在喧嚣时代中，练习深度独处。</span>
+        </div>
+    </div>
+
+    <!-- 个人项目 / 喜欢的物， 表现审美洁癖 -->
+    <div class="section">
+        <div class="section-title">/ 微小创造</div>
+        <div class="bio-text" style="margin-bottom: 0.5rem;">
+            ✦ 一份仍在更新的《反消费主义书单》<br>
+            ✦ 个人播客《无人车道》—— 偶尔谈论电影、诗歌与技术伦理<br>
+            ✦ 开源小工具：<strong>“极简时钟”</strong> · 一款克制白噪音页面，已获 1.2k star
+        </div>
+    </div>
+
+    <!-- 连接触角 — 但不打扰核心表达-->
+    <div class="links">
+        <a href="#" class="link-item">📖 电子邮局</a>
+        <a href="#" class="link-item">✎ 墨迹 / 笔记</a>
+        <a href="#" class="link-item">🐦 松散思考</a>
+        <a href="#" class="link-item">🕊️ 作品档案</a>
+        <a href="#" class="link-item">📡 RSS 订阅</a>
+    </div>
+    
+    <div class="footer-note">
+        © 2026 林怀宣 · 保持真实与孤傲 <br>
+        本博客不追踪数据 · 每一次访问都如初次晤面
+    </div>
+</div>
+
+<!-- 非常轻量的点缀，让引用可以简单锚点平滑，但不影响极简审美 -->
+<script>
+    // 仅为所有 .essay-title 的占位链接阻止默认跳转，展示一种个人主义的反馈（可选，但保留可点视觉效果）
+    // 因为是静态博客演示，添加 console 友好
+    document.querySelectorAll('.essay-title').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            // 个人习惯小提醒: 实际博客中跳转至文章详情，这里营造一种“阅读意向”
+            alert('📜「' + link.innerText + '」是一篇尚未公开的沉思录。\n（演示版提醒——实际博客会链接到完整文章）');
+        });
+    });
+    document.querySelectorAll('.link-item').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if(link.getAttribute('href') === '#') {
+                e.preventDefault();
+                alert('🔗 这是一个安静的链接入口，未来将接入你的社交或订阅页。\n保持极简，保持自留地风格。');
+            }
+        });
+    });
+    // 页面加载完以后在控制台输出一句话，符合个人主义气质: 忠于自己
+    console.log('%c✨ 个人主义页面 · 简洁克制 ｜ 你就是你自己的标准', 'color: #b87c5a; font-size: 12px;');
+</script>
+</body>
+</html>
